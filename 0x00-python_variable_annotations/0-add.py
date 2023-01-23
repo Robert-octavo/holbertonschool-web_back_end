@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-""" Write a type-annotated function add that takes a
-	float a and a float b
-	as arguments and returns their sum as a float.
-"""
+""" fReturns the sum of a and b """
 
 
 def add(a: float, b: float) -> float:
-    """Returns the sum of a and b"""
+    """
+    Function that sum two float numbers
+    args:
+        a: float number
+        b: float number
+    Return: sum
+    """
     return a + b
