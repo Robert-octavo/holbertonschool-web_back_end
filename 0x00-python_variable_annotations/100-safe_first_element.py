@@ -1,6 +1,6 @@
 #!/usr/bin/env  python3
 
-"""Returns the first element of the list as a float"""
+"""Duck typing - first element of a sequence"""
 
 from typing import Sequence, Any, Union
 
