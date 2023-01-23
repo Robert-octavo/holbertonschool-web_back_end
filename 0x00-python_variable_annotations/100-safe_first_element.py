@@ -2,12 +2,12 @@
 
 """Returns the first element of the list as a float"""
 
-from typing import List, Union
+from typing import Sequence, Any, Union
 
 
-def safe_first_element(input_list: List[float]) -> Union[float, None]:
+def safe_first_element(lst: Sequence[Any]) -> Union[Any, None]:
     """Returns the first element of the list as a float"""
-    if input_list:
-        return input_list[0]
+    if lst:
+        return lst[0]
     else:
         return None
