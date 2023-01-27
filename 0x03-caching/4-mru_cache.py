@@ -20,12 +20,13 @@ class MRUCache(BaseCaching):
         if key and item:
             if key in self.cache_data:
                 self.keys.remove(key)
-            self.keys.appendleft(key)
-            self.cache_data[key] = item
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+            elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 last = self.keys.popleft()
                 del self.cache_data[last]
                 print("DISCARD: {}".format(last))
+
+            self.keys.appendleft(key)
+            self.cache_data[key] = item
 
     def get(self, key):
         """Get an item by key"""
