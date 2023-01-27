@@ -20,15 +20,15 @@ class LIFOCache(BaseCaching):
         """Add an item in the cache"""
         if key is None or item is None:
             return None
-        if key and item:
-            if key in self.keys:
-                self.keys.remove(key)
-            self.keys.append(key)
-            self.cache_data[key] = item
-            if len(self.keys) > BaseCaching.MAX_ITEMS:
-                last = self.keys.pop()
-                del self.cache_data[last]
-                print("DISCARD: {}".format(last))
+
+        if key in self.cache_data.keys():
+            self.cache_data.pop(key)
+        self.cache_data[key] = item
+
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            last = list(self.cache_data.keys())[-2]
+            self.cache_data.pop(last)
+            print("DISCARD: {}".format(last))
 
     def get(self, key):
         """Get an item by key"""
