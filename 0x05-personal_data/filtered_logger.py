@@ -43,6 +43,22 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
                                    host=host, database=database)
 
 
+def main():
+    """ main function """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+    fields = [i[0] for i in cursor.description]
+    logger = get_logger()
+    for row in cursor:
+        message = ""
+        for i in range(len(fields)):
+            message += f"{fields[i]}={row[i]};"
+        logger.info(message)
+    cursor.close()
+    db.close()
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class """
 
