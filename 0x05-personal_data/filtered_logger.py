@@ -75,3 +75,7 @@ class RedactingFormatter(logging.Formatter):
         """ format method """
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
+
+
+if __name__ == '__main__':
+    main()
