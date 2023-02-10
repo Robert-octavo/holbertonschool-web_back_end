@@ -36,7 +36,10 @@ class SessionExpAuth(SessionAuth):
             return None
         if self.session_duration <= 0:
             return self.user_id_by_session_id[session_id]['user_id']
-        if self.user_id_by_session_id[session_id]['created_at'] + \
-                self.session_duration < datetime.now():
+        if self.user_id_by_session_id[session_id]['created_at']:
+            return None
+        expire_time = self.user_id_by_session_id[session_id]['created_at'] + \
+            datetime.timedelta(seconds=self.session_duration)
+        if expire_time < datetime.now():
             return None
         return self.user_id_by_session_id[session_id]['user_id']
