@@ -3,7 +3,7 @@
 
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
-import datetime
+from datetime import datetime
 
 
 class SessionExpAuth(SessionAuth):
