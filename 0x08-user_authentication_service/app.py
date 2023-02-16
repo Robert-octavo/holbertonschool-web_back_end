@@ -74,7 +74,7 @@ def update_password():
         AUTH.update_password(reset_token, new_password)
         payload = {"email": email, "message": "Password updated"}
         return flask.jsonify(payload), 200
-    except ValueError:
+    except Exception:
         abort(403)
 
 
