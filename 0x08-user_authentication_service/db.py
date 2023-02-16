@@ -45,8 +45,10 @@ class DB:
         if not kwargs:
             raise InvalidRequestError
 
-        for key, value in kwargs.items():
-            if not hasattr(User, key):
+        column = User.__table__.columns.keys()
+
+        for key in kwargs.keys():
+            if key not in column:
                 raise InvalidRequestError
 
         return self._session.query(User).filter_by(**kwargs).one()
