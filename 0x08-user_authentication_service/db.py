@@ -55,8 +55,9 @@ class DB:
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update a user by keyword arguments
         """
-        col = user.__table__.columns.keys()
+
         user = self.find_user_by(id=user_id)
+        col = user.__table__.columns.keys()
         for key, value in kwargs.items():
             if key not in col:
                 raise ValueError
