@@ -44,7 +44,6 @@ class DB:
         """
         if not kwargs:
             raise InvalidRequestError
-
         column = User.__table__.columns.keys()
 
         for key in kwargs.keys():
