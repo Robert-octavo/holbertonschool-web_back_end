@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """Main file"""
 
-from flask import Flask, jsonify, request, abort, redirect
+from flask import Flask, request, abort, redirect
 from auth import Auth
+import flask
 
 app = Flask(__name__)
 AUTH = Auth()
 
 
-@app.route('/', methods=['GET'], strict_slashes=False)
+@app.route('/', methods=['GET'])
 def welcome():
     """Return a welcome message"""
-    return jsonify({"message": "Bienvenue"})
+    return flask.jsonify({"message": "Bienvenue"})
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
