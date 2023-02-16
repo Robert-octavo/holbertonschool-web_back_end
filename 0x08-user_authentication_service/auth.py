@@ -29,6 +29,8 @@ class Auth:
         except NoResultFound:
             user = self._db.add_user(email, _hash_password(password))
 
+        return user
+
     def valid_login(self, email: str, password: str) -> bool:
         """Validate login"""
         try:
