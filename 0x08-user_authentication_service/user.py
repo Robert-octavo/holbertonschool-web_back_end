@@ -27,21 +27,3 @@ class User(Base):
     hashed_password = Column(String(250), nullable=False)
     session_id = Column(String(250), nullable=True)
     reset_token = Column(String(250), nullable=True)
-
-    def __init__(self, *args, **kwargs):
-        """ init method """
-        super().__init__(*args, **kwargs)
-
-    def __str__(self):
-        """ str method """
-        return "{}: {}".format(self.id, self.email)
-
-    def to_json(self):
-        """ to_json method """
-        return {
-            "id": self.id,
-            "email": self.email,
-            "hashed_password": self.hashed_password,
-            "session_id": self.session_id,
-            "reset_token": self.reset_token
-        }
