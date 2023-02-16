@@ -9,8 +9,10 @@ import bcrypt
 import uuid
 
 
-def _hash_password(password: str) -> str:
+def _hash_password(password: str) -> bytes:
     """Hashes a password"""
+    if not password:
+        return None
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
@@ -33,8 +35,8 @@ class Auth:
             if user:
                 raise ValueError("User {} already exists".format(email))
         except NoResultFound:
-            user = self._db.add_user(email, _hash_password(password))
-            return user
+            new_user = self._db.add_user(email, _hash_password(password))
+            return new_user
 
     def valid_login(self, email: str, password: str) -> bool:
         """Validate login"""
