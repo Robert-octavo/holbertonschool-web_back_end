@@ -35,7 +35,8 @@ class Auth:
             if user:
                 raise ValueError("User {} already exists".format(email))
         except NoResultFound:
-            new_user = self._db.add_user(email, _hash_password(password))
+            hash_password = _hash_password(password)
+            new_user = self._db.add_user(email, hash_password)
             return new_user
 
     def valid_login(self, email: str, password: str) -> bool:
