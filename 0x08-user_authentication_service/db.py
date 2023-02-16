@@ -44,10 +44,12 @@ class DB:
         """
         if not kwargs:
             raise InvalidRequestError
-        try:
-            return self._session.query(User).filter_by(**kwargs).one()
-        except NoResultFound:
-            raise NoResultFound
+
+        for key, value in kwargs.items():
+            if not hasattr(User, key):
+                raise InvalidRequestError
+
+        return self._session.query(User).filter_by(**kwargs).one()
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update a user by keyword arguments
