@@ -37,7 +37,7 @@ class TestGetJson(unittest.TestCase):
         ('http://holberton.io', {'payload': False})
     ])
     @patch('requests.get')
-    def test_get_json(self, test_url, test_payload):
+    def test_get_json(self, test_url, test_payload, mock):
         """Parameterize a unit test """
         mock.json.return_value = test_payload
         mock.return_value = mock
