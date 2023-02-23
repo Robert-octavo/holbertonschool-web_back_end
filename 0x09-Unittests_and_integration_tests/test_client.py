@@ -41,3 +41,15 @@ class TestGithubOrgClient(unittest.TestCase):
                          test_payload['repos_url'])
         self.assertEqual(test.public_repos(), mock.return_value)
         mock.assert_called_once()
+
+    @parameterized.expand([
+        ('google', [{'name': 'google'}, {'name': 'google'}]),
+        ('abc', [{'name': 'abc'}, {'name': 'abc'}]),
+    ])
+    @patch('client.get_json')
+    def test_public_repos_with_license(self, test_url, test_payload, mock):
+        """Parameterize a unit test	"""
+        mock.return_value = test_payload
+        test = GithubOrgClient(test_url)
+        self.assertEqual(test.public_repos('google'), mock.return_value)
+        mock.assert_called_once()
