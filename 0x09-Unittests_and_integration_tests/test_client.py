@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Parameterize a unit test	"""
 
-from utils import access_nested_map, get_json, memoize
 from client import GithubOrgClient
 from parameterized import parameterized
 import unittest
@@ -22,3 +21,9 @@ class TestGithubOrgClient(unittest.TestCase):
         test = GithubOrgClient(test_url)
         self.assertEqual(test.org, test_payload)
         mock.assert_called_once()
+
+    def test_public_repos_url(self):
+        """Parameterize a unit test	"""
+        test = GithubOrgClient('google')
+        self.assertEqual(test._public_repos_url,
+                         'https://api.github.com/orgs/google/repos')
