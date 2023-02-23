@@ -5,9 +5,10 @@ from utils import access_nested_map
 from parameterized import parameterized
 import unittest
 
+
 class TestAccessNestedMap(unittest.TestCase):
     """Parameterize a unit test """
-    
+
     @parameterized.expand([
         ({'a': 1}, ['a'], 1),
         ({'a': {'b': 2}}, ['a'], {'b': 2}),
