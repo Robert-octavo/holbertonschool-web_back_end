@@ -27,3 +27,17 @@ class TestGithubOrgClient(unittest.TestCase):
         test = GithubOrgClient('google')
         self.assertEqual(test._public_repos_url,
                          'https://api.github.com/orgs/google/repos')
+
+    @parameterized.expand([
+        ('google', {'repos_url': 'https://api.github.com/orgs/google/repos'}),
+        ('abc', {'repos_url': 'https://api.github.com/orgs/abc/repos'}),
+    ])
+    @patch('client.get_json')
+    def test_public_repos(self, test_url, test_payload, mock):
+        """Parameterize a unit test	"""
+        mock.return_value = test_payload
+        test = GithubOrgClient(test_url)
+        self.assertEqual(test._public_repos_url,
+                         test_payload['repos_url'])
+        self.assertEqual(test.public_repos(), mock.return_value)
+        mock.assert_called_once()
