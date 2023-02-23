@@ -40,6 +40,7 @@ class TestGetJson(unittest.TestCase):
     def test_get_json(self, test_url, test_payload):
         """Parameterize a unit test """
         mock.json.return_value = test_payload
+        mock.return_value = mock
         self.assertEqual(get_json(test_url), test_payload)
 
 
