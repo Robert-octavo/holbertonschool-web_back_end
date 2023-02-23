@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 
 
-class estGithubOrgClient(unittest.TestCase):
+class TestGithubOrgClient(unittest.TestCase):
     """Parameterize a unit test	"""
 
     @parameterized.expand([
