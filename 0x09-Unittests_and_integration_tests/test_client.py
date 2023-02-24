@@ -2,7 +2,7 @@
 """Parameterize a unit test	"""
 
 from client import GithubOrgClient
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 import unittest
 from unittest.mock import patch
 
@@ -50,3 +50,19 @@ class TestGithubOrgClient(unittest.TestCase):
         """Parameterize a unit test	"""
         test = GithubOrgClient('google')
         self.assertEqual(test.has_license(repo, license_key), expected)
+
+
+@parameterized_class(('org_payload', 'repos_payload', 'expected_repos', 'apache2_repos'))
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """Parameterize a unit test	"""
+
+    @classmethod
+    def setUpClass(cls):
+        """Parameterize a unit test	"""
+        cls.get_patcher = patch('client.get_json')
+        cls.mock_get = cls.get_patcher.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        """Parameterize a unit test	"""
+        cls.get_patcher.stop()
