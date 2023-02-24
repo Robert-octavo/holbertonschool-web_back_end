@@ -66,3 +66,20 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     def tearDownClass(cls):
         """Parameterize a unit test	"""
         cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        """Parameterize a unit test	"""
+        self.mock_get.side_effect = [self.org_payload, self.repos_payload]
+        test = GithubOrgClient('google')
+        self.assertEqual(test.org, self.org_payload)
+        self.assertEqual(test.public_repos(), self.expected_repos)
+        self.mock_get.assert_called()
+
+    def test_public_repos_with_license(self):
+        """Parameterize a unit test	"""
+        self.mock_get.side_effect = [self.org_payload, self.repos_payload]
+        test = GithubOrgClient('google')
+        self.assertEqual(test.org, self.org_payload)
+        self.assertEqual(test.public_repos_with_license('apache-2.0'),
+                         self.apache2_repos)
+        self.mock_get.assert_called()
