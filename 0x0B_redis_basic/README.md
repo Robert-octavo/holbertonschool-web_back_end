@@ -1,4 +1,5 @@
 # 0x0B. Redis basic
+
 ## Resources
 
 ### **Read or watch:**
@@ -20,9 +21,11 @@
     $ sed -i "s/bind .*/bind 127.0.0.1/g" /etc/redis/redis.conf
 
 ## **Use Redis in a container**
-    
+
         $ docker run -p 6379:6379 -d redis:latest
         $ docker exec -it <container_id> bash
         $ redis-cli
 
 Redis server is stopped by default - when you are starting a container, you should start it with: service redis-server start
+
+[functools.wraps](https://docs.python.org/3.7/library/functools.html#functools.wraps)
