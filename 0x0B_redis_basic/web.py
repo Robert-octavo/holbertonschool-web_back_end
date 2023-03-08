@@ -1,5 +1,7 @@
 #!/urs/bin/env python3
-"""Web module"""
+"""
+How to use redis for basic operations
+"""
 
 import requests
 import redis
