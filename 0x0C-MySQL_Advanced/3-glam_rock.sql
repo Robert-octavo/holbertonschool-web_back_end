@@ -9,7 +9,8 @@
 -- Your script can be executed on any database
 
 SELECT
-    band_name, (split - formed) AS lifespan
+    band_name,
+    IFNULL(split, 2023) - formed AS lifespan
 FROM metal_bands
-WHERE main_style = 'Glam rock'
+WHERE style = 'Glam rock'
 ORDER BY lifespan DESC;
