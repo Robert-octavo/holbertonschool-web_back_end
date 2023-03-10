@@ -4,11 +4,9 @@
 
 -- when the email has been changed.
 
-CREATE RESETS TRIGGER BEFORE UPDATE ON USERS FOR EACH 
+CREATE TRIGGER resets BEFORE UPDATE ON users FOR EACH 
 ROW BEGIN 
 	IF NEW.email <> OLD.email THEN
-	UPDATE users
-	SET NEW.valid_email = 0
-	WHERE id = NEW.id;
+		SET NEW.valid_email = 0
 	END IF;
-END; 
+END;
