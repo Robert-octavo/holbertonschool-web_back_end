@@ -1,10 +1,13 @@
 -- Write a SQL script that creates a TRIGGER
+
 DELIMITER $$
-CREATE TRIGGER resets BEFORE UPDATE ON users FOR EACH 
+
+CREATE TRIGGER RESETS BEFORE UPDATE ON USERS FOR EACH 
 ROW BEGIN 
-	IF NEW.email <> OLD.email THEN
-		SET NEW.valid_email = 0
+	IF OLD.email <> NEW.email THEN SET NEW.valid_email = 0;
 	END IF;
-END;
-$$
+END; 
+
+$$ 
+
 DELIMITER;
