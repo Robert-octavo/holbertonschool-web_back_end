@@ -11,4 +11,4 @@ ROW BEGIN
 	SET NEW.valid_email = 0
 	WHERE id = NEW.id;
 	END IF;
-END; 
+END;
