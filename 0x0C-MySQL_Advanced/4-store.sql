@@ -4,19 +4,16 @@
 
 --a new order.Quantity in the table items can be negative.
 
-DELIMITER $$
+DELIMITER $
 
-DROP TRIGGER
-    IF EXISTS decreases $$ CREATE DECREASES TRIGGER AFTER
-INSERT
-    ON ORDERS FOR EACH ROW BEGIN
-UPDATE items
-SET
-    quantity = quantity - NEW.number
-WHERE name = NEW.item_name;
+CREATE TRIGGER DECREASES BEFORE INSERT ON ORDERS FOR 
+EACH ROW BEGIN 
+	UPDATE items
+	SET
+	    quantity = quantity - NEW.number
+	WHERE name = NEW.item_name;
+END; 
 
-END;
-
-END$$ 
+$ 
 
 DELIMITER ;
