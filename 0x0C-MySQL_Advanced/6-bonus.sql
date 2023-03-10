@@ -1,9 +1,31 @@
 -- SQL script that creates a stored procedure
+
 DELIMITER $$
-CREATE PROCEDURE AddBonus ( IN user_id int, IN project_name varchar(255), IN score int )
-BEGIN
-    INSERT INTO projects (name) SELECT project_name FROM DUAL
-    WHERE NOT EXISTS (SELECT * FROM projects WHERE name = project_name);
-    INSERT INTO corrections (user_id, project_id, score)
-    VALUES (user_id, (SELECT id FROM projects WHERE name = project_name), score);
-END;$$
+
+CREATE PROCEDURE ADDBONUS(USER_ID INT, PROJECT_NAME 
+VARCHAR(255), SCORE INT) BEGIN 
+	SET @project_id = (
+	        SELECT id
+	        FROM projects
+	        WHERE
+	            name = project_name
+	    );
+	IF @project_id IS NULL THEN
+	INSERT INTO projects(name)
+	VALUES (project_name);
+	SET @project_id = (
+	        SELECT id
+	        FROM projects
+	        WHERE
+	            name = project_name
+	    );
+	END IF;
+	INSERT INTO
+	    corrections(user_id, project_id, score)
+	VALUES (user_id, @project_id, score);
+	END 
+$ 
+
+$ 
+
+DELIMITER;
