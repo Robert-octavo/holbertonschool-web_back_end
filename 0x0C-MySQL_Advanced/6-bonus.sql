@@ -9,31 +9,14 @@
 -- table you should create it
 
 -- score, the score value for the correction
-
-CREATE PROCEDURE AddBonus(IN USER_ID INT, IN PROJECT_NAME 
-VARCHAR(255), IN SCORE INT) BEGIN 
-	DECLARE project_id INT;
-	DECLARE correction_id INT;
-	SELECT id INTO project_id
-	FROM projects
-	WHERE name = project_name;
-	IF project_id IS NULL THEN
-	INSERT INTO
-	    projects (name)
-	VALUES (project_name);
-	SELECT
-	    id INTO project_id
-	FROM projects
-	WHERE name = project_name;
+DELIMITER //
+CREATE PROCEDURE AddBonus(IN user_id INT, IN project_name VARCHAR(255), IN score INT) 
+BEGIN SET @project = (SELECT id FROM projects WHERE name = project_name);
+	IF @project IS NULL THEN
+		INSERT INTO projects (name) VALUES (project_name);
 	END IF;
-	INSERT INTO
-	    corrections (user_id, project_id, score)
-	VALUES (user_id, project_id, score);
-	SELECT id INTO correction_id
-	FROM corrections
-	WHERE
-	    user_id = user_id
-	    AND project_id = project_id
-	    AND score = score;
-	INSERT INTO bonuses (correction_id) VALUES (correction_id);
-	END 
+INSERT INTO corrections(user_id, project_id, score) VALUES (user_id, @project, score);
+END; //
+DELIMITER;
+
+
