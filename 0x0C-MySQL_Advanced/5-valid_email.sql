@@ -6,9 +6,9 @@
 
 CREATE RESETS TRIGGER BEFORE UPDATE ON USERS FOR EACH 
 ROW BEGIN 
-	IF NEW.email != OLD.email THEN
+	IF NEW.email <> OLD.email THEN
 	UPDATE users
 	SET NEW.valid_email = 0
 	WHERE id = NEW.id;
 	END IF;
-END;
+END; 
