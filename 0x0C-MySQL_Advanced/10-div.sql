@@ -4,8 +4,8 @@
 
 -- takes 2 arguments a, int - b, int
 
-CREATE FUNCTION SAFEDIV(A INT, B INT) RETURNS INT BEGIN 
-	DECLARE result int;
+CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS DOUBLE BEGIN 
+	DECLARE result FLOAT;
 	IF b = 0 THEN SET result = 0;
 	ELSE SET result = a / b;
 	END IF;
