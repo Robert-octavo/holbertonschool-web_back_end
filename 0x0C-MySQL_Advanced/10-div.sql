@@ -5,9 +5,8 @@
 -- takes 2 arguments a, int - b, int
 
 DELIMITER $$
-CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS DOUBLE BEGIN 
+CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS DOUBLE DETERMINISTIC BEGIN 
 	DECLARE result FLOAT;
-	DETERMINISTIC
 	IF b = 0 THEN SET result = 0;
 	ELSE SET result = a / b;
 	END IF;
