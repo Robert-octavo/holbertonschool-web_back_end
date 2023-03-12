@@ -12,7 +12,7 @@ CREATE PROCEDURE ComputeAverageWeightedScoreForUser
 (IN user_id INT) BEGIN 
 	DECLARE avg_score FLOAT;
 	SELECT
-	    AVG(score * weight) INTO avg_score
+	    SUM(score*weight) / SUM(weight) INTO avg_score
 	FROM AS u JOIN corrections as c ON u.id=c.user_id
 	JOIN projects AS p ON c.project_id=p.id
 	WHERE id = user_id;
