@@ -10,7 +10,7 @@ CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 	BEGIN 
 	UPDATE users AS u,
 	(SELECT
-	    SUM(score * weight) / SUM(weight) AS avg_score
+	    u.id, SUM(score * weight) / SUM(weight) AS avg_score
 	FROM users AS u
 	    JOIN corrections as c ON u.id = c.user_id
 	    JOIN projects AS p ON c.project_id = p.id
