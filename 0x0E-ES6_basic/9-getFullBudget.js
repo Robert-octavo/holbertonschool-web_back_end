@@ -1,4 +1,5 @@
 import getBudgetObject from './7-getBudgetObject.js';
+/* lint */
 
 export default function getFullBudgetObject(income, gdp, capita) {
   const budget = getBudgetObject(income, gdp, capita);
