@@ -31,5 +31,5 @@ export default async function asyncUploadUser() {
     return { photo, user }; // return { photo: null, user: null }
   }
 
-  return { photo, user }; 
+  return { photo, user };
 }
