@@ -18,12 +18,11 @@ Example:
 
 export default function guardrail(mathFunction) {
   const queue = [];
+  const message = 'Guardrail was processed';
   try {
-    queue.push(mathFunction());
+    queue.push(mathFunction(), message);
   } catch (error) {
-    queue.push(error.message);
-  } finally {
-    queue.push('Guardrail was processed');
+    queue.push(`Error: ${error.message}`, message);
   }
   return queue;
 }
