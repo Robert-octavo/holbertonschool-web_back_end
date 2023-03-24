@@ -14,20 +14,12 @@ export default class Airport {
     this._code = code;
   }
 
-  get name() {
-    return this._name;
-  }
-
   set name(name) {
     if (typeof name === 'string') {
       this._name = name;
     } else {
       throw new TypeError('Name must be a string');
     }
-  }
-
-  get code() {
-    return this._code;
   }
 
   set code(code) {
@@ -38,10 +30,7 @@ export default class Airport {
     }
   }
 
-  [Symbol.toPrimitive](hint) {
-    if (hint === 'string') {
-      return this._code;
-    }
-    return this;
+  get [Symbol.toStringTag]() {
+    return this._code;
   }
 }
