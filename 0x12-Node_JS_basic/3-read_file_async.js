@@ -32,10 +32,16 @@ module.exports = function countStudents(path) {
       const studentsByCS = line.filter((student) => student.includes('CS')).map((student) => student.split(',')[0]);
       const studentsBySWE = line.filter((student) => student.includes('SWE')).map((student) => student.split(',')[0]);
 
+      const test = [];
+      test.push(`Number of students: ${line.length}`);
+      test.push(`Number of students in CS: ${studentsByCS.length}. List: ${studentsByCS.join(', ')}`);
+      test.push(`Number of students in SWE: ${studentsBySWE.length}. List: ${studentsBySWE.join(', ')}`);
+
       console.log(`Number of students: ${line.length}`);
       console.log(`Number of students in CS: ${studentsByCS.length}. List: ${studentsByCS.join(', ')}`);
       console.log(`Number of students in SWE: ${studentsBySWE.length}. List: ${studentsBySWE.join(', ')}`);
-      resolve(line);
+
+      resolve(test);
     });
   });
 };

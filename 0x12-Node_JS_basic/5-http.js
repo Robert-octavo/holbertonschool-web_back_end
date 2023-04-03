@@ -11,53 +11,26 @@ create a small HTTP server using the http module:
 - CSV file can contain empty lines (at the end) - and they are not a valid student!
 */
 
-/* const http = require('http'); // import the http module
+const http = require('http'); // import the http module
 const countStudents = require('./3-read_file_async');
 
 const app = http.createServer(async (req, res) => { // create the server
   res.statusCode = 200; // set the status code
   res.setHeader('Content-Type', 'text/plain'); // set the header
+
   if (req.url === '/') {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     res.write('This is the list of our students\n');
     try {
-        const students = await countStudents(process.argv[2]);
-        res.write(students.join('\n'));
-    } catch (error) {
-        res.write(error.message);
-    }
-    res.statusCode = 400;
-    res.end();
-  }
-});
-
-app.listen(1245); // listen on port 1245
-
-module.exports = app; */
-
-const http = require('http');
-const countStudents = require('./3-read_file_async');
-
-const localhost = '127.0.0.1';
-const port = 1245;
-
-const app = http.createServer(async (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  if (req.url === '/') {
-    res.write('Hello Holberton School!');
-  } else if (req.url === '/students') {
-    res.write('This is the list of our students\n');
-    try {
       const students = await countStudents(process.argv[2]);
-      res.write(students.join('\n'));
+      res.end(students.join('\n'));
     } catch (error) {
       res.end(error.message);
     }
   }
-  res.statusCode = 404;
-  res.end();
-}).listen(port, localhost);
+});
+
+app.listen(1245); // listen on port 1245
 
 module.exports = app;
