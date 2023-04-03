@@ -20,8 +20,9 @@ function countStudents(path) {
     throw new Error('Cannot load the database');
   }
 
-  const students = fs.readFileSync(path, { encoding: 'utf8', flag: 'r' }); // read the file
-  const line = students.split('\n').slice(1); // remove the first line
+  let students = fs.readFileSync(path, { encoding: 'utf8', flag: 'r' }); // read the file
+  let line = students.split('\n').slice(1); // remove the first line
+  line = line.filter((value) => value); // remove empty lines
 
   const studentsByCS = line.filter((student) => student.includes('CS')).map((student) => student.split(',')[0]);
   const studentsBySWE = line.filter((student) => student.includes('SWE')).map((student) => student.split(',')[0]);
