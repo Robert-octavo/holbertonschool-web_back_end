@@ -25,7 +25,10 @@ app.get('/students', async (req, res) => {
   try {
     const students = await countStudents(process.argv[2]);
     res.end(students.join('\n'));
+    res.statusCode = 200;
+    res.end();
   } catch (error) {
+    res.statusCode = 500;
     res.end(error.message);
   }
 });
